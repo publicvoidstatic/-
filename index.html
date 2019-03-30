@@ -1,238 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        body, ul, ol, li, img {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
+  <meta charset="UTF-8">
+  <title></title>
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      border: 0;
+    }
 
-        #box {
-            width: 520px;
-            height: 280px;
-            padding: 5px;
-            position: relative;
-            border: 1px solid #ccc;
-            margin: 100px auto 0;
-        }
+    .all {
+      width: 500px;
+      height: 200px;
+      padding: 7px;
+      border: 1px solid #ccc;
+      margin: 100px auto;
+      position: relative;
+    }
 
-        .ad {
-            width: 520px;
-            height: 280px;
-            overflow: hidden;
-            position: relative;
-        }
+    .screen {
+      width: 500px;
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
 
-        #box img {
-            width: 520px;
-        }
+    .screen li {
+      width: 500px;
+      height: 200px;
+      overflow: hidden;
+      float: left;
+    }
 
-        .ad ol {
-            position: absolute;
-            right: 10px;
-            bottom: 10px;
-        }
+    .screen ul {
+      position: absolute;
+      left: 0;
+      top: 0px;
+      width: 3000px;
+    }
 
-        .ad ol li {
-            width: 20px;
-            height: 20px;
-            line-height: 20px;
-            border: 1px solid #ccc;
-            text-align: center;
-            background: #fff;
-            float: left;
-            margin-right: 10px;
-            cursor: pointer;
-            _display: inline;
-        }
+    .all ol {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      line-height: 20px;
+      text-align: center;
+    }
 
-        .ad ol li.current {
-            background: yellow;
-        }
+    .all ol li {
+      float: left;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border: 1px solid #ccc;
+      margin-left: 10px;
+      cursor: pointer;
+    }
 
-        .ad ul li {
-            float: left;
-        }
+    .all ol li.current {
+      background: deeppink;
+    }
 
-        .ad ul {
-            position: absolute;
-            top: 0;
-            width: 2940px;
-        }
+    #arr {
+      display: none;
+    }
 
-        .ad ul li.current {
-            display: block;
-        }
+    #arr span {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      left: 5px;
+      top: 50%;
+      margin-top: -20px;
+      background: #000;
+      cursor: pointer;
+      line-height: 40px;
+      text-align: center;
+      font-weight: bold;
+      font-family: '黑体';
+      font-size: 30px;
+      color: #fff;
+      opacity: 0.3;
+      border: 1px solid #fff;
+    }
 
-        #focusD {
-            display: none;
-        }
-
-        #focusD span {
-            width: 40px;
-            height: 40px;
-            position: absolute;
-            left: 5px;
-            top: 50%;
-            margin-top: -20px;
-            background: #000;
-            cursor: pointer;
-            line-height: 40px;
-            text-align: center;
-            font-weight: bold;
-            font-family: '黑体';
-            font-size: 30px;
-            color: #fff;
-            opacity: 0.3;
-            border: 1px solid #fff;
-        }
-
-        #focusD #right {
-            right: 5px;
-            left: auto;
-        }
-        .square  li {
-            width: 16px;
-            height: 16px;
-            border: 1px solid gray;
-            cursor: pointer;
-            text-align: center;
-            /*vertical-align: middle;*/
-        }
-        .square{
-            position:absolute;
-            bottom: 25px;
-            left: 100px;
-        }
-        .current{
-            background-color: deeppink;
-        }
-    </style>
+    #arr #right {
+      right: 5px;
+      left: auto;
+    }
+  </style>
 </head>
 <body>
-    <div id="box" class="all">
-        <div class="ad">
-            <ul id="imgs">
-                <li><img src="images/01.jpg"/></li>
-                <li><img src="images/02.jpg"/></li>
-                <li><img src="images/03.jpg"/></li>
-                <li><img src="images/04.jpg"/></li>
-                <li><img src="images/01.jpg"/></li>
-            </ul>
-            <div class="square">
-                <ul id="ul">
-                    <li class="current">1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
-                </ul>
-            </div>
-        </div><!--相框-->
-        <div id="focusD"><span id="left">&lt;</span><span id="right">&gt;</span>
-        </div>
-    </div>
+<div class="all" id='box'>
+  <div class="screen"><!--相框-->
+    <ul>
+      <li><img src="images/1.jpg" width="500" height="200"/></li>
+      <li><img src="images/2.jpg" width="500" height="200"/></li>
+      <li><img src="images/3.jpg" width="500" height="200"/></li>
+      <li><img src="images/4.jpg" width="500" height="200"/></li>
+      <li><img src="images/5.jpg" width="500" height="200"/></li>
+    </ul>
+    <ol>
+    </ol>
+  </div>
+  <div id="arr"><span id="left">&lt;</span><span id="right">&gt;</span></div>
+</div>
+
     <script>
-        //获取大的boxdiv
-        var box = document.getElementById('box');
-        //首先获取相框；
-        var ad = box.children[0];
-        //获取相框的宽度
-        var adwidth = ad.offsetWidth;
-        //获取ul标签；
-        var ul = ad.children[0];
-        //获取左边的按钮
-        var left = document.getElementById('left');
-        //获取右边的按钮
-        var right = document.getElementById('right');
+      //获取所有需要用到的元素
+      //获取最外层的那个div
+      var box = document.getElementById('box');
+      //获取相框screen，将来移动一步的距离就是这个宽度；
+      var screen = box.children[0];
+      //获取screen的宽度；
+      var screenwidth = screen.offsetWidth;
+      //获取ul
+      var ul = screen.children[0];
+      //获取ul中所有的li
+      var list = ul.children;
+      //获取ol
+      var ol = screen.children[1];
+      //获取左右箭头所在的那个div，到时候直接控制这个div的显示和隐藏就可以控制两个箭头
+      var arr = document.getElementById('arr');
+      //创建下面的小按钮,创建的个数等于包裹图片li的个数；
+      for (var i =0;i<list.length;i++){
+        var li = document.createElement('li');
+        //给每个小圆点添加一个索引值；
+        li.setAttribute('index',i);
+        li.innerText=i+1;
+        ol.appendChild(li);
+      }
+        //设置默认 页面加载完成显示第一张图片；
+      ol.children[0].className = 'current';
+      //控制鼠标移动到哪个小圆点上，则显示哪一个图片，并将当前的小圆点的背景色设置成红色
+      //只需要将其他所有的小圆点的背景色取消
 
-        var focusD = document.getElementById('focusD');
-
-        box.onmouseover = function () {
-            focusD.style.display = 'block';
-            // clearInterval(timer);
-
+      //获取所有的小圆点；遍历，给每个小圆点注册的鼠标移入事件
+      var index =0;
+      var ollist = ol.children;
+      for (var i =0;i<ollist.length;i++){
+        ollist[i].onmouseover = function () {
+          //首先将其他圆点的背景色取消
+          for(var j =0;j<ollist.length;j++){
+            ollist[j].className='';
+          }
+          //将当前移动到的那个小圆点背景色改成红色的
+          this.className = 'current';
+          //获取当前的索引值，移动的距离就等于索引*图片宽度；
+           index = this.getAttribute('index');
+          //注意，这里移动的是ul，也就是那个图片的父元素；
+          move(ul,-index * screenwidth);
         }
-        var timer = setInterval(clickHandler,1000);
+      }
 
-        //鼠标移出事件
-        box.onmouseout = function () {
-            focusD.style.display = 'none';
-           // timer = setInterval(clickHandler,1000)
-        }
-        //右侧按钮点击的事件；
-        right.onclick = clickHandler;
-        //给右边的按钮注册点击事件
-        var index = 0;
-        function clickHandler () {
-            if (index<ul.children.length-1){
-                index++;
-                move(ul, -index*adwidth);
-            }
-        }
-        //给大的div注册鼠标移入事件
-        /**
-         * 因为我们的左右焦点在一个div当中，我们只要让div显示或者隐藏就可以实现
-         * 让左右两个按钮实现隐藏和显示的效果
-         */
+      //因为要实现无缝效果，所以要增加一张图片，和第一张一样的
+      var node = list[0].cloneNode(true);
+      ul.appendChild(node);
 
+      //鼠标移入大的那个div则显示左右两个小按钮；
+      box.onmouseover = showButton;
 
-       //左侧按钮点击的事件
-        left.onclick = function () {
-            if (index>0){
-                index--;
-                move(ul, -index*adwidth);
-            }
-        }
-        //下方小圆点移入鼠标的时间和点击事件
-        //获取所有的小圆点
-        var cires = document.getElementById('ul').children;
-        //便利所有的小按钮，给每个按钮注册点击事件和移入事件
-        for(var i =0;i<cires.length;i++){
-            //将索引的值保存到元素当中去
-            cires[i].setAttribute('index',i);
-            //鼠标移入事件
-            cires[i].onmouseover= function () {
-                //将所有的每一个小圆圈的class样式去掉
-                for (var i =0;i<cires.length;i++){
-                    cires[i].removeAttribute('class');
-                }
-                this.className='current';
-                //移入鼠标的同时将图片移动到当前数字对应的图片上
-                move(ul, -this.getAttribute('index')*520);
-            }
-            // cires[i].onclick = function () {
-            //     for (var i =0;i<cires.length;i++){
-            //         cires[i].removeAttribute('class');
-            //     }
-            //     this.className='current';
-            //     move(ul, -this.getAttribute('index')*520);
-            // }
-        }
+      //鼠标移出隐藏按钮
+      box.onmouseout = hidButton;
 
+      //给右侧的按钮注册鼠标点击事件；
+      var right = document.getElementById('right');
+      right.onclick = rightClick;
 
-        //移动元素的方法
-        function move(e,t) {
-                var timer = setInterval(function () {
-                //首先获取元素当前的位置
-                var current = e.offsetLeft;
-                var step = 10;
-                //判断走的方向，如果目标距离大于当前距离走正数，小于则走负数
-                step = current<t?step :-step;
-                current+=step;
-                //如果剩余距离大于步长则继续走，否则销毁计时器
-                if (Math.abs(t-current)>Math.abs(step)){
-                    e.style.left = current+'px';
-                }else {
-                    //直接到达目标位置，并清理定时器
-                    e.style.left = t+'px';
-                    clearInterval(timer);
-                }
-            },20)
+      //给左侧的按钮注册鼠标点击事件；
+      var left = document.getElementById('left');
+      left.onclick = leftClick;
+
+      //元素移动函数
+      function move(ele,target) {
+       var timer = setInterval(function () {
+         //首先获取当前元素所在的位置
+         var current = ele.offsetLeft;
+         //定义每次移动的距离，也就是步长
+         var step = 50;
+         //确定要走的方向，往右为正数，往左为负数；
+         step = current<target ? step : -step;
+         current += step;
+         //如果剩余的距离比走一步的距离更大则继续走，
+         if (Math.abs(target-current)>Math.abs(step)){
+           ele.style.left = current +'px';
+         } else {//程序走到这里说明剩下的距离小于步长则直接到达目标位置
+           ele.style.left = target+'px'
+           //清除定时器
+           clearInterval(timer);
+         }
+       },10);
+      }
+
+      //鼠标移入显示按钮函数
+      function showButton() {
+        arr.style.display = 'block';
+        clearInterval(timer);
+      }
+      var timer = setInterval(rightClick,1000);
+      //鼠标移出将按钮隐藏
+      function hidButton() {
+        arr.style.display = 'none';
+        timer = setInterval(rightClick,1000);
+      }
+      //左边按钮点击事件；
+      function leftClick() {
+        if (index ==0){
+          index = list.length-1;
+          ul.style.left = -index * screenwidth+'px';
+          move(ul,-index * screenwidth);
         }
-    </script>
+        index--;
+        move(ul,-index * screenwidth);
+        for(var i =0;i<ol.children.length;i++){
+          ol.children[i].removeAttribute('class');
+        }
+        //设置当前
+        ol.children[index].className = 'current';
+      }
+      //右侧按钮点击事件
+      function rightClick() {
+        //点击按钮，向左移动一张图片的宽度
+        if (index==list.length-1){
+          ul.style.left=0+'px';
+          index =0;
+        }
+        index++;
+        move(ul, -index *screenwidth);
+        if (index == list.length-1){
+          //此时索引为5，但是用户看到的是第一张图片的效果
+          //所以我们将按钮1显示为红色，5变成无色；
+          ol.children[ol.children.length-1].className = '';
+          ol.children[0].className = 'current';
+        }else{
+          //当索引为其他值得时候实际上就是一个排他功能；
+          for (var i =0;i<ol.children.length;i++){
+            ol.children[i].removeAttribute('class');
+          }
+            ol.children[index].className = 'current';
+        }
+      }
+   </script>
 </body>
 </html>
